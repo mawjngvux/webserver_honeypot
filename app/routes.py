@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from app.decorators import login_required
+from app.alert import send_discord_alert
 
 honeypot_routes = Blueprint("honeypot", __name__)
 
@@ -13,8 +14,10 @@ def login():
         session["username"] = username
 
         if username == "admin" or password == "admin":
+            send_discord_alert("Admin is logged in!")
             return redirect(url_for("honeypot.admin"))
         else:
+            send_discord_alert(f"User {username} is logged in")
             return redirect(url_for("honeypot.index", username=username))
         
     return render_template("login.html") 

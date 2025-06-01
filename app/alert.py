@@ -1,4 +1,4 @@
-from flask import requests
+import requests
 from config.secrets import DISCORD_WEBHOOK_URL
 
 def send_discord_alert(message: str):

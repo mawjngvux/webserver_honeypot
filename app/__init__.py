@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from config.config import Config
 from config.secrets import SECRET_KEY
+from app.logger import setup_logger
 from app.routes import honeypot_routes
 
 def create_app():
@@ -8,4 +9,5 @@ def create_app():
     app.config.from_object(Config)
     app.config['SECRET_KEY'] = SECRET_KEY
     app.register_blueprint(honeypot_routes)
+    setup_logger()
     return app

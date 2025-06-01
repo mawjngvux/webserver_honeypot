@@ -1,0 +1,19 @@
+<!-- templates/search.html -->
+<!DOCTYPE html>
+<html>
+<head><title>Search</title></head>
+<body>
+  <h2>Search</h2>
+  <form method="GET" action="/search">
+    <input name="q" placeholder="Search something..." />
+    <button type="submit">Go</button>
+  </form>
+
+  {% if query %}
+    <p>Results for: <strong>{{ query }}</strong></p>
+    <!-- intentionally unescaped to simulate reflected XSS -->
+  {% endif %}
+  <a href="javascript:history.back()">Quay lại</a>
+
+</body>
+</html>

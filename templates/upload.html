@@ -1,0 +1,14 @@
+<!-- templates/upload.html -->
+<!DOCTYPE html>
+<html>
+<head><title>Upload</title></head>
+<body>
+  <h2>Upload File</h2>
+  <form method="POST" action="/upload" enctype="multipart/form-data">
+    File: <input type="file" name="file" /><br />
+    <button type="submit">Upload</button>
+  </form>
+  <p>Only .jpg or .png files allowed</p>
+  <a href="javascript:history.back()">Quay lại</a>
+</body>
+</html>

@@ -1,0 +1,1 @@
+SECRET_KEY = "vu_van_manh_dep_trai_vo_cung_tan"

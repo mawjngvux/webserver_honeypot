@@ -1,19 +1,86 @@
 <!-- templates/search.html -->
 <!DOCTYPE html>
-<html>
-<head><title>Search</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fc;
+      padding: 60px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-box {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 12px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .results {
+      margin-top: 30px;
+      font-size: 16px;
+      color: #444;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      color: #555;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
 <body>
-  <h2>Search</h2>
-  <form method="GET" action="/search">
-    <input name="q" placeholder="Search something..." />
-    <button type="submit">Go</button>
-  </form>
+  <div class="search-box">
+    <h2>Search</h2>
+    <form method="GET" action="/search">
+      <input type="text" name="q" placeholder="Search something..." required />
+      <button type="submit">Go</button>
+    </form>
 
-  {% if query %}
-    <p>Results for: <strong>{{ query }}</strong></p>
-    <!-- intentionally unescaped to simulate reflected XSS -->
-  {% endif %}
-  <a href="javascript:history.back()">Quay lại</a>
+    {% if query %}
+      <div class="results">
+        <p>Results for: <strong>{{ query|safe }}</strong></p> <!-- reflected XSS nếu không escape -->
+      </div>
+    {% endif %}
 
+    <a href="javascript:history.back()">← Quay lại</a>
+  </div>
 </body>
 </html>

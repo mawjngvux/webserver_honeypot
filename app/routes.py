@@ -1,6 +1,10 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, session, send_from_directory
 from app.decorators import login_required
 from app.alert import send_discord_alert
+from config.config import Config
+from app.utils import allowed_file
+import os
+from werkzeug.utils import secure_filename
 
 honeypot_routes = Blueprint("honeypot", __name__)
 
@@ -46,4 +50,14 @@ def search():
 @honeypot_routes.route("/upload", methods=["GET", "POST"])
 @login_required
 def upload():
-    return render_template("upload.html")
+    filename = None
+    if request.method == "POST":
+        file = request.files.get('file')
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(Config.UPLOAD_DIR, filename))
+    return render_template("upload.html", filename=filename)
+
+@honeypot_routes.route('/upload/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(os.path.join("..", Config.UPLOAD_DIR), filename)

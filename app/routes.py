@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, send_from_directory
 from app.decorators import login_required
 from app.alert import send_discord_alert
+from app.logger import log_request
 from config.config import Config
 from app.utils import allowed_file
 import os
@@ -61,3 +62,8 @@ def upload():
 @honeypot_routes.route('/upload/<filename>')
 def uploaded_file(filename):
     return send_from_directory(os.path.join("..", Config.UPLOAD_DIR), filename)
+
+@honeypot_routes.after_request
+def log_all_request(response):
+    log_request(request, response.status_code)
+    return response

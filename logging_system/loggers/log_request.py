@@ -1,19 +1,8 @@
-import logging
 from config.config import Config
 import json
 import re
 import uuid
 from datetime import datetime
-
-def honeypot_web_logger():
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format='%(asctime)s - %(levelname)s - %(message)s',
-        handlers=[
-            logging.FileHandler(Config.HONEYPOT_WEB_SERVER_LOG_FILE),
-            logging.StreamHandler()
-        ]
-    )
 
 def sanitize_headers(headers):
     sanitized = {}
@@ -30,17 +19,25 @@ def log_request(req, response_status=None):
         form_data = {}
 
     record = {
+        # 1. Metadata / định danh
         "request_id": str(uuid.uuid4()),
-        "remoteaddr": req.remote_addr,
+        "event_time": datetime.utcnow().isoformat() + "Z",
+        
+        # 2. Thông tin client
+        "remote_addr": req.remote_addr,
+        "user_agent": req.user_agent.string,
+
+        # 3. Thông tin HTTP Request
         "method": req.method,
-        "requesturi": req.full_path,    # full path bao gồm query string
-        "headers": sanitize_headers(req.headers),
+        "request_url": req.full_path,  # bao gồm query string
         "query_params": req.args.to_dict(flat=False),
-        "useragent": req.user_agent.string,
-        "postform": form_data,
-        "eventtime": datetime.utcnow().isoformat() + "Z",
+        "headers": sanitize_headers(req.headers),
+        "post_form": form_data,
+
+        # 4. Thông tin phản hồi
         "response_status": response_status
     }
+    
 
     with open(Config.LOG_REQUEST, "a", encoding="utf-8") as f:
         f.write(json.dumps(record, default=str, ensure_ascii=False) + "\n")

@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from config.config import Config
 from config.secrets import SECRET_KEY
-from app.logger import honeypot_web_logger
+from logging_system.loggers.logger import honeypot_web_logger
 from app.routes import honeypot_routes
 
 def create_app():

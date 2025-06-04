@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from config.config import Config
 from config.secrets import SECRET_KEY
 from logging_system.loggers.logger import honeypot_web_logger
-from app.routes import honeypot_routes
+from honeypot_web_server.app.routes import honeypot_routes
 
 def create_app():
     app = Flask(__name__, template_folder="../templates")  

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, send_from_directory
 from app.decorators import login_required
-from app.alert import send_discord_alert
+from alerting_system.discord_alert import send_discord_alert
 from logging_system.loggers.log_request import log_request
 from config.config import Config
 from app.utils import allowed_file

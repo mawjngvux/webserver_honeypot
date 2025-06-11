@@ -3,6 +3,7 @@ import json
 import re
 import uuid
 from datetime import datetime
+from database.mongo import get_collection
 
 def sanitize_headers(headers):
     sanitized = {}
@@ -38,6 +39,5 @@ def log_request(req, response_status=None):
         "response_status": response_status
     }
     
-
-    with open(Config.LOG_REQUEST, "a", encoding="utf-8") as f:
-        f.write(json.dumps(record, default=str, ensure_ascii=False) + "\n")
+    logs = get_collection("requests")
+    logs.insert_one(record)

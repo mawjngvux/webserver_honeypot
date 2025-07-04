@@ -4,5 +4,5 @@ class Config:
     LOG_REQUEST = "logging_system/log_files/log_request.json"
     UPLOAD_DIR = 'honeypot_web_server/uploads/'
     ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
-    MONGOURI = "mongodb://localhost:27017"
+    MONGOURI = "mongodb://honeypot_user:123456@localhost:27017/?authSource=honeypotdb" 
     MONGO_DB_NAME = "honeypotdb"

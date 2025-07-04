@@ -1,0 +1,76 @@
+honeypot_system/
+├── README.md
+├── alerting_system
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-312.pyc
+│   │   └── discord_alert.cpython-312.pyc
+│   ├── base.py
+│   ├── discord_alert.py
+│   ├── dispatcher.py
+│   ├── email_alert.py
+│   ├── telegram_alert.py
+│   ├── yahoo_alert.py
+│   └── zalo_alert.py
+├── analytics
+│   ├── __init__.py
+│   ├── analyzer.py
+│   ├── detector.py
+│   ├── loader.py
+│   ├── utils.py
+│   └── visualizer.py
+├── config
+│   ├── __pycache__
+│   │   ├── config.cpython-312.pyc
+│   │   └── secrets.cpython-312.pyc
+│   ├── config.py
+│   └── secrets.py
+├── database
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-312.pyc
+│   │   └── mongo.cpython-312.pyc
+│   └── mongo.py
+├── honeypot_web_server
+│   ├── app
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-312.pyc
+│   │   │   ├── alert.cpython-312.pyc
+│   │   │   ├── database.cpython-312.pyc
+│   │   │   ├── decorator.cpython-312.pyc
+│   │   │   ├── decorators.cpython-312.pyc
+│   │   │   ├── logger.cpython-312.pyc
+│   │   │   ├── routes.cpython-312.pyc
+│   │   │   └── utils.cpython-312.pyc
+│   │   ├── decorators.py
+│   │   ├── routes.py
+│   │   └── utils.py
+│   ├── static
+│   │   └── style.css
+│   ├── templates
+│   │   ├── admin.html
+│   │   ├── index.html
+│   │   ├── login.html
+│   │   ├── search.html
+│   │   └── upload.html
+│   └── uploads
+│       ├── cat1.jpg
+│       ├── cat2.jpg
+│       ├── dog1.jpeg
+│       └── dog2.jpeg
+├── logging_system
+│   ├── log_files
+│   │   ├── honeypot_web_server.log
+│   │   └── log_request.json
+│   └── loggers
+│       ├── __init__.py
+│       ├── __pycache__
+│       │   ├── __init__.cpython-312.pyc
+│       │   ├── log_request.cpython-312.pyc
+│       │   └── logger.cpython-312.pyc
+│       ├── log_request.py
+│       └── logger.py
+├── main.py
+├── requirements.txt
+└── venv
